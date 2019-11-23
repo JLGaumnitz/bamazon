@@ -44,7 +44,7 @@ function bamazon() {
                     name: "ID",
                     type: "input",
                     message: "Enter Item ID you wish to purchase: ",
-                    filter: Number
+                    filter: Number,
                 },
                 {
                     name: "Quantity",
@@ -65,13 +65,13 @@ function bamazon() {
 
                         var totalCost = (res[0].price * quantity).toFixed(2);
 
-                        console.log("Good news! Your item is in stock." + "\nYour total cost for " + quantity + " orders of " + res[0].product_name + " is $" + totalCost + ". Thank you for your purchase!");
+                        console.log("Good news! Your item is in stock." + "\nYour total cost for " + quantity + " order(s) of " + res[0].product_name + " is $" + totalCost + ". Thank you for your purchase!");
 
                         // Query to remove purchased item(s) from database
                         connection.query("UPDATE products SET stock_quantity=? WHERE item_id = ?", [res[0].stock_quantity - quantity, itemID]);
 
                         // Runs the function again, so the customer can continue shopping
-                        bamazon();
+                        newPurchasePrompt()
 
                     }
 
@@ -79,11 +79,27 @@ function bamazon() {
                         console.log("We are sorry, but our current inventory of " + res[0].product_name + " is insufficient to complete your order. \nPlease make a different selection or reduce your quantity."),
 
                             // Runs the function again, so the customer can continue shopping
-                            bamazon()
+                            newPurchasePrompt()
 
                     }
 
+                });
             });
     });
-});
+}
+
+function newPurchasePrompt() {
+    inquirer.
+        prompt([{
+            message: "Would you like to make another purchase?",
+            name: "choice",
+            type: "confirm"
+        }]).
+        then(user => {
+            if (user.choice) {
+                bamazon();
+            } else {
+                connection.end()
+            }
+        })
 }

@@ -16,18 +16,18 @@ CREATE TABLE products(
 Select * FROM products;
 
 INSERT INTO products (item_id, product_name, department_name, price, stock_quantity) 
-VALUES (101, "saddle", "horse tack", 600.00, 20),
-	   (102, "head stall", "horse tack", 100.00, 20),
-	   (103, "snaffle bit", "horse tack", 30.00, 20),
-	   (104, "saddle pad", "horse tack", 150.00, 20),
-	   (105, "girth", "horse tack", 100.00, 20),
-	   (201, "riding boots", "rider gear", 150.00, 15),
-	   (202, "breeches", "rider gear", 100.00, 15),
-	   (203, "helmet", "rider gear", 150.00, 15),
-	   (204, "riding gloves", "rider gear", 20.00, 15),
-	   (205, "half chaps", "rider gear", 50.00, 10),
-        (301, "muck rake", "barn equipment", 30.00, 10),
-        (302, "push broom", "barn equipment", 30.00, 10),
-        (303, "horse feed", "barn equipment", 20.00, 10),
-        (304, "feed bucket", "barn equipment", 20.00, 10),
-        (305, "water bucket", "barn equipment", 20.00, 10)
+VALUES (101, "Saddle", "Horse Tack", 600.00, 20),
+	   (102, "Head Stall", "Horse Tack", 100.00, 20),
+	   (103, "Snaffle Bit", "Horse Tack", 30.00, 20),
+	   (104, "Saddle Pad", "Horse Tack", 150.00, 20),
+	   (105, "Girth", "Horse Tack", 100.00, 20),
+	   (201, "Riding Boots", "Rider Gear", 150.00, 15),
+	   (202, "Breeches", "Rider Gear", 100.00, 15),
+	   (203, "Helmet", "Rider Gear", 150.00, 15),
+	   (204, "Riding Gloves", "Rider Gear", 20.00, 15),
+	   (205, "Half Chaps", "Rider Gear", 50.00, 10),
+        (301, "Muck Rake", "Barn Equipment", 30.00, 10),
+        (302, "Push Broom", "Barn Equipment", 30.00, 10),
+        (303, "50-lb Bag of Horse Feed", "Barn Equipment", 20.00, 10),
+        (304, "Feed Bucket", "Barn Equipment", 20.00, 10),
+        (305, "Water Bucket", "Barn Equipment", 20.00, 10)
