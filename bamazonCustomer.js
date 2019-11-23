@@ -13,64 +13,77 @@ const connection = mysql.createConnection({
 connection.connect(function (err) {
     if (err) throw err;
     console.log("connected as id" + connection.threadId);
+
+    bamazon()
 });
 
-var displayProducts = function () {
-    var query = "Select * FROM products";
-    connection.query(query, function (err, res) {
+// Begin Display Inventory Table
+function bamazon() {
+
+    connection.query("Select * FROM products", function (err, res) {
         if (err) throw err;
+
         var displayTable = new Table({
-            head: ["Item ID", "Product", "Category", "Price", "Quantity Available"],
-            colWidths: [10, 25, 25, 5, 25]
+            head: ["Item ID", "Product", "Department", "Price", "Quantity Available"],
+            colWidths: [10, 25, 25, 10, 25]
         });
+
         for (var i = 0; i < res.length; i++) {
             displayTable.push(
-                [res[i].item_id, res[i].product_name, res[i].department_name, res[i].price, res[i].stock_quantity]
+                [res[i].item_id, res[i].product_name, res[i].department_name, parseFloat(res[i].price).toFixed(2), res[i].stock_quantity]
             );
         }
+
         console.log(displayTable.toString());
-        purchasePrompt();
+        // End Display Inventory Table
+
+        // Prompt Customer's Input
+        inquirer
+            .prompt([
+                {
+                    name: "ID",
+                    type: "input",
+                    message: "Enter Item ID you wish to purchase: ",
+                    filter: Number
+                },
+                {
+                    name: "Quantity",
+                    type: "input",
+                    message: "Enter number of items you wish to purchase: ",
+                    filter: Number
+                },
+
+            ])
+            .then(function (userAnswer) {
+                var itemID = userAnswer.ID;
+                var quantity = userAnswer.Quantity;
+
+                connection.query("SELECT * FROM products WHERE item_id=" + itemID, function (err, res) {
+                    if (err) throw err;
+
+                    if (res[0].stock_quantity - quantity >= 0) {
+
+                        var totalCost = (res[0].price * quantity).toFixed(2);
+
+                        console.log("Good news! Your item is in stock." + "\nYour total cost for " + quantity + " orders of " + res[0].product_name + " is $" + totalCost + ". Thank you for your purchase!");
+
+                        // Query to remove purchased item(s) from database
+                        connection.query("UPDATE products SET stock_quantity=? WHERE item_id = ?", [res[0].stock_quantity - quantity, itemID]);
+
+                        // Runs the function again, so the customer can continue shopping
+                        bamazon();
+
+                    }
+
+                    else {
+                        console.log("We are sorry, but our current inventory of " + res[0].product_name + " is insufficient to complete your order. \nPlease make a different selection or reduce your quantity."),
+
+                            // Runs the function again, so the customer can continue shopping
+                            bamazon()
+
+                    }
+
+            });
     });
+});
 }
-
-function purchasePrompt() {
-    inquirer.prompt([
-        {
-            name: "ID",
-            type: "input",
-            message: "Enter Item ID you wish to purchase: ",
-            filter: Number
-        },
-        {
-            name: "Quantity",
-            type: "input",
-            message: "Enter number of items you wish to purchase: ",
-            filter: Number
-        },
-
-    ]).then(function (userAnswer) {
-        var requestedID = userAnswer.ID;
-        var requestedQuantity = userAnswer.Quantity;
-        purchaseOrder(requestedID, requestedQuantity);
-    });
-};
-
-function purchaseOrder(ID, Quantity) {
-    var query = "Select * FROM products WHERE item_id = " + ID
-    connection.query(query, function (err, res) {
-        if (err) throw err;
-
-        if (Quantity <= res[0].stock_quantity) {
-            var totalCost = res[0].price * Quantity;
-            console.log("Good news! Your item is in stock." + "\nYour total cost for " + Quantity + " orders of " + res[0].product_name + " is $" + totalCost + ". Thank you for your purchase!");
-
-            connection.query("UPDATE products SET stock_quantity = stock_quantity - " + Quantity + "WHERE item_id = " + ID);
-
-        } else {
-            console.log("We are sorry, but our current inventory of " + res[0].product_name + " is insufficient to complete your order.");
-        };
-        displayProducts();
-    });
-};
-
-displayProducts(); 
