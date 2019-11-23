@@ -2,6 +2,14 @@ const mysql = require("mysql");
 const inquirer = require("inquirer");
 const Table = require("cli-table");
 
+// Text and background colors (learned from this Stack Overflow post: https://stackoverflow.com/questions/9781218/how-to-change-node-jss-console-font-color)
+const FgWhite = "\x1b[0m";
+const FgCyan = "\x1b[36m";
+const FgGreen = "\x1b[32m";
+const FgYellow = "\x1b[33m";
+const BgRed = "\x1b[41m";
+const BgBlue = "\x1b[44m";
+
 const connection = mysql.createConnection({
     host: "localhost",
     port: 3306,
@@ -9,6 +17,7 @@ const connection = mysql.createConnection({
     password: "",
     database: "bamazon_db"
 });
+
 
 connection.connect(function (err) {
     if (err) throw err;
@@ -65,7 +74,7 @@ function bamazon() {
 
                         var totalCost = (res[0].price * quantity).toFixed(2);
 
-                        console.log("Good news! Your item is in stock." + "\nYour total cost for " + quantity + " order(s) of " + res[0].product_name + " is $" + totalCost + ". Thank you for your purchase!");
+                        console.log("Good news! Your item is in stock." + "\nYour total cost for " + FgYellow + quantity + FgWhite + " order(s) of '" + res[0].product_name + "' is " + FgGreen + "$" + totalCost + FgWhite + ". " + BgBlue + "Thank you for your purchase!" + FgWhite);
 
                         // Query to remove purchased item(s) from database
                         connection.query("UPDATE products SET stock_quantity=? WHERE item_id = ?", [res[0].stock_quantity - quantity, itemID]);
@@ -76,7 +85,7 @@ function bamazon() {
                     }
 
                     else {
-                        console.log("We are sorry, but our current inventory of " + res[0].product_name + " is insufficient to complete your order. \nPlease make a different selection or reduce your quantity."),
+                        console.log(BgRed + "We are sorry, but our current inventory of '" + res[0].product_name + "' is insufficient to complete your order. \nPlease make a different selection or reduce your quantity." + FgWhite),
 
                             // Runs the function again, so the customer can continue shopping
                             newPurchasePrompt()
