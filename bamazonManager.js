@@ -199,7 +199,7 @@ function addProduct() {
                 },
                 function (err) {
                     if (err) throw err;
-                    console.log(BgBlue + `The following order has been placed: \n${newProduct.initialStockOrder} of ${newProduct.item}, under the department ${newProduct.department}, with a price of $ ${newProduct.price}` + FgWhite)
+                    console.log(BgBlue + `The following order has been placed: \n${newProduct.initialStockOrder} of ${newProduct.item}, under the department ${newProduct.department}, with a price of $${newProduct.price}` + FgWhite)
 
                     newCommandPrompt();
                 }
