@@ -27,14 +27,14 @@ To install and use this application yourself, clone the git folder to your hard 
 
 Executing this file displays all of the items available for sale, and includes the IDs, names, prices, and quantity available for all the products for sale.
 
-![initial view](./images/bamazon_Customer_01_Initial_View.PNG "Initial Customer View")
+![initial customer view](./images/bamazon_Customer_01_Initial_View.PNG "Initial Customer View")
 
 The app then prompts the user with two messages.
 
    * The first asks them to input the ID of the product they would like to buy.
    * The second asks how many units of the product they would like to buy.
 
-   ![initial view](./images/bamazon_Customer_02_2_Questions.PNG "Questions for the Customer")
+   ![customer questions](./images/bamazon_Customer_02_2_Questions.PNG "Questions for the Customer")
 
 Once the customer has placed the order, the application checks the database to see if the store has enough of the product to meet the customer's request.
 
@@ -42,11 +42,11 @@ If there is sufficient product, the app fulfills the customer's order.
    * The app displays a message that the purchase was successful and calculates and displays the total cost of the purchase.
    * The app updates the SQL database to decrement the amount of product purchased to reflect the remaining quantity.
    
-   ![initial view](./images/bamazon_Customer_03_Successful_Purchase.PNG "Successful Purchase and Update of Inventory")
+   ![successful purchase](./images/bamazon_Customer_03_Successful_Purchase.PNG "Successful Purchase and Update of Inventory")
 
 If there is insufficient inventory, the app alerts the customer and asks the customer to make a different selection or reduce the quantity requested. The order does not go through.
 
- ![initial view](./images/bamazon_Customer_04_Insufficient_Inventory.PNG "Insufficient Inventory Message")
+ ![insufficient inventory](./images/bamazon_Customer_04_Insufficient_Inventory.PNG "Insufficient Inventory Message")
 
 Once the customer has finished making purchases, they will answer "No" to the question "Would you like to make another purchase?" to exit the application.
 
@@ -56,37 +56,37 @@ Once the customer has finished making purchases, they will answer "No" to the qu
 
 Executing this file displays a list of prompts, each with a different task the manager can choose by using the arrow keys and pressing enter. After executing each task, the manager is asked if they would like to complete another task.
 
-![initial view](./images/bamazon_Manager_01_Initial_View.PNG "Initial Manager Task View")
+![initial manager task list](./images/bamazon_Manager_01_Initial_View.PNG "Initial Manager Task List")
 
 **View all products in inventory** will yield a table like the following:
 
-![initial view](./images/bamazon_Manager_02_View_All_Products.PNG "Initial Manager View")
+![all products view](./images/bamazon_Manager_02_View_All_Products.PNG "Manager View of All Products")
 
 **View low inventory** yields a table of just the products with fewer than 5 items remaining in inventory:
 
-![initial view](./images/bamazon_Manager_03_View_Low_Inventory_Items.PNG "Low Inventory View")
+![low inventory view](./images/bamazon_Manager_03_View_Low_Inventory_Items.PNG "Low Inventory View")
 
 **Add to inventory** allows the manager to choose an existing product from a list (using the arrow keys and Enter) and enter a quantity to increase the stock for that item.
 
-![initial view](./images/bamazon_Manager_04_Add_to_Inventory_Existing_Items.PNG "Questions to answer to add inventory to an existing product")
+![adding inventory questions](./images/bamazon_Manager_04_Add_to_Inventory_Existing_Items.PNG "Questions to answer to add inventory to an existing product")
 
 When successful, the manager will see a message stating the new stock quantity.
 
-![initial view](./images/bamazon_Manager_05_Successful_Addition_to_Inventory.PNG "Questions to answer to add inventory to an existing product")
+![adding inventory questions part 2](./images/bamazon_Manager_05_Successful_Addition_to_Inventory.PNG "Questions to answer to add inventory to an existing product")
 
 **Add a new product** allows the manager to add a new product to the store's inventory. The task begins by asking for the product name and asking the manager to choose the department from a prepopulated list (using the arrow keys and Enter).
 
-![initial view](./images/bamazon_Manager_06_Add_New_Item_to_Store.PNG "Questions to answer to add a new product")
+![adding a new product questions](./images/bamazon_Manager_06_Add_New_Item_to_Store.PNG "Questions to answer to add a new product")
 
-![initial view](./images/bamazon_Manager_07_Add_New_Item_to_Store_Questions.PNG "Questions to answer to add a new product")
+![adding a new product questions part 2](./images/bamazon_Manager_07_Add_New_Item_to_Store_Questions.PNG "Questions to answer to add a new product")
 
 Upon successfully adding the item, the manager sees a message that states that the order for the new product was successfully placed:
 
-![initial view](./images/bamazon_Manager_08_Successful_Addition_of_New_Item_to_Store.PNG "Successful addition of a new product order")
+![successful addition of new product](./images/bamazon_Manager_08_Successful_Addition_of_New_Item_to_Store.PNG "Successful addition of a new product order")
 
 And the database for the store's inventory is updated with the new item's ID number, name, price, and quantity available.
 
-![initial view](./images/bamazon_Manager_09_Successful_Addition_of_New_Item_to_Store.PNG "Successful addition of a new product order")
+![successful addition of new product part 2](./images/bamazon_Manager_09_Successful_Addition_of_New_Item_to_Store.PNG "Successful addition of a new product order")
 
 
 ### Why the Project is Useful ###
